@@ -2,6 +2,11 @@
 
 All notable changes to CSV Grid Editor are documented here.
 
+## [1.7.2] - 2026-06-08
+
+### Fixed
+- **README badges** — The Version / Installs / Rating badges were broken because their provider is not on the Marketplace's allowed badge-host list (and shields.io has retired its Marketplace badges). Switched to `badgen.net`, which is allow-listed and serves live data.
+
 ## [1.7.1] - 2026-06-08
 
 ### Added
