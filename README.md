@@ -156,6 +156,15 @@ When a file is open in full (non-preview) mode, the editor watches the file on d
 
 ---
 
+## ❤️ Support This Project
+
+If CSV Grid Editor saves you time, you can support its continued development — completely optional, always appreciated:
+
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/Robin-Reiche)
+[![Ko-fi](https://img.shields.io/badge/Buy%20me%20a%20coffee-Ko--fi-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/robinreiche)
+
+---
+
 ## Contact
 
 **Robin Reiche**

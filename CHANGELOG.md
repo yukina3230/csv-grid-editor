@@ -2,6 +2,11 @@
 
 All notable changes to CSV Grid Editor are documented here.
 
+## [1.7.1] - 2026-06-08
+
+### Added
+- **Sponsor / support links** — A **Sponsor** button (GitHub Sponsors) now appears on the extension page, and the README has a Support section linking GitHub Sponsors and Ko-fi for anyone who would like to support development. Entirely optional.
+
 ## [1.7.0] - 2026-06-08
 
 ### Added
