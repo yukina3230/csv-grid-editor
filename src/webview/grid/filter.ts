@@ -16,6 +16,7 @@ export function createCombinedFilter(colType: ColType): any {
         _searchQuery = '';
         truncated = false;
         _renderValuesList: (() => void) | null = null;
+        _displayedValues: string[] = [];
 
         init(params: any) {
             this.params = params;
@@ -291,31 +292,45 @@ export function createCombinedFilter(colType: ColType): any {
             searchInp.value = this._searchQuery;
             valSec.appendChild(searchInp);
 
-            const actions = document.createElement('div');
-            actions.className = 'csv-filter-actions';
-            const selAll = document.createElement('button');
-            selAll.className = 'csv-filter-link';
-            selAll.textContent = 'Select All';
-            const deselAll = document.createElement('button');
-            deselAll.className = 'csv-filter-link';
-            deselAll.textContent = 'Deselect All';
-            actions.appendChild(selAll);
-            actions.appendChild(deselAll);
-            valSec.appendChild(actions);
+            const masterRow = document.createElement('label');
+            masterRow.className = 'csv-filter-master';
+            const masterCb = document.createElement('input');
+            masterCb.type = 'checkbox';
+            const masterLabel = document.createElement('span');
+            masterLabel.className = 'csv-filter-master-label';
+            masterLabel.textContent = '(Select all)';
+            const masterCount = document.createElement('span');
+            masterCount.className = 'csv-filter-master-count';
+            masterRow.appendChild(masterCb);
+            masterRow.appendChild(masterLabel);
+            masterRow.appendChild(masterCount);
+            valSec.appendChild(masterRow);
 
             const listDiv = document.createElement('div');
             listDiv.className = 'csv-filter-values-list';
             valSec.appendChild(listDiv);
 
+            const syncMaster = () => {
+                const displayed = this._displayedValues;
+                const total = displayed.length;
+                let checked = 0;
+                for (const v of displayed) if (this.checkedValues.has(v)) checked++;
+                masterCb.checked = total > 0 && checked === total;
+                masterCb.indeterminate = checked > 0 && checked < total;
+                masterCb.disabled = total === 0;
+                masterCount.textContent = total > 0 ? `${checked} / ${total}` : '';
+            };
+
             const renderList = () => {
                 listDiv.innerHTML = '';
                 const q = this._searchQuery.toLowerCase();
 
-                // Only values that pass ALL active conditions
                 let items: { label: string; value: string; isBlank: boolean }[] = [];
                 if (this._showBlankInList()) items.push({ label: '(Blank)', value: '__blank__', isBlank: true });
                 this._valuesPassingCondition().forEach(v => items.push({ label: v, value: v, isBlank: false }));
                 if (q) items = items.filter(it => it.label.toLowerCase().includes(q));
+
+                this._displayedValues = items.map(it => it.value);
 
                 if (items.length === 0) {
                     const empty = document.createElement('div');
@@ -324,6 +339,7 @@ export function createCombinedFilter(colType: ColType): any {
                         ? 'No values match this condition'
                         : 'No matching values';
                     listDiv.appendChild(empty);
+                    syncMaster();
                     return;
                 }
                 items.forEach(item => {
@@ -335,6 +351,7 @@ export function createCombinedFilter(colType: ColType): any {
                     cb.addEventListener('change', () => {
                         if (cb.checked) this.checkedValues.add(item.value);
                         else this.checkedValues.delete(item.value);
+                        syncMaster();
                         this.params.filterChangedCallback();
                     });
                     const span = document.createElement('span');
@@ -350,21 +367,21 @@ export function createCombinedFilter(colType: ColType): any {
                     note.textContent = 'Showing first 2000 unique values';
                     listDiv.appendChild(note);
                 }
+                syncMaster();
             };
 
             this._renderValuesList = renderList;
 
-            selAll.addEventListener('click', () => {
-                this._valuesPassingCondition().forEach(v => this.checkedValues.add(v));
-                if (this._showBlankInList()) this.checkedValues.add('__blank__');
+            masterCb.addEventListener('change', () => {
+                const check = masterCb.checked;
+                for (const v of this._displayedValues) {
+                    if (check) this.checkedValues.add(v);
+                    else this.checkedValues.delete(v);
+                }
                 renderList();
                 this.params.filterChangedCallback();
             });
-            deselAll.addEventListener('click', () => {
-                this.checkedValues.clear();
-                renderList();
-                this.params.filterChangedCallback();
-            });
+
             searchInp.addEventListener('input', () => {
                 this._searchQuery = searchInp.value;
                 renderList();
