@@ -378,6 +378,7 @@ export function createCombinedFilter(colType: ColType): any {
                     if (check) this.checkedValues.add(v);
                     else this.checkedValues.delete(v);
                 }
+                if (check && this._showBlankInList()) this.checkedValues.add('__blank__');
                 renderList();
                 this.params.filterChangedCallback();
             });
