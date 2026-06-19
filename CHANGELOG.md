@@ -2,6 +2,16 @@
 
 All notable changes to CSV Grid Editor are documented here.
 
+## [1.13.0] - 2026-06-19
+
+### Added
+- **Escape closes the open menu or popup** - Pressing `Esc` now dismisses whichever menu, dropdown or popover is open: the column and row context menus, the Export and Delimiter dropdowns, the column chooser, Go to row, the rename popover and the per-column filter panel ([#22](https://github.com/Robin-Reiche/csv-grid-editor/pull/22)). It only steps in when a popup is actually open, so `Esc` still cancels a cell edit as before.
+
+### Changed
+- **Tri-state "Select all" in the column chooser and the value filter** - The **Show / hide columns** menu and the per-column value filter each used to have two buttons (Show all / Hide all, Select All / Deselect All). Both are now a single tri-state **Select all** master checkbox that ticks when everything is selected, shows a dash when only some is and carries a `checked / total` count, the familiar spreadsheet control (requested in [#19](https://github.com/Robin-Reiche/csv-grid-editor/issues/19)). When you type in the search box it scopes to the matches and relabels to **Select all matches**, so the count stays honest while a search is active ([#20](https://github.com/Robin-Reiche/csv-grid-editor/pull/20), [#21](https://github.com/Robin-Reiche/csv-grid-editor/pull/21)).
+
+Thanks to [@yukina3230](https://github.com/yukina3230) who contributed all three changes in this release.
+
 ## [1.12.0] - 2026-06-16
 
 ### Added

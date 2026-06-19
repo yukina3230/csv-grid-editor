@@ -106,7 +106,7 @@ For files larger than 10 MB you get a quick menu to open the full file, preview 
 - **Rename** - Right-click a column header → **Rename column** to rename it. The new name is written to the CSV header row and is fully undoable.
 
 ### Show / Hide Columns
-- **Column chooser** - Click the checklist icon in the toolbar to open a searchable list of all columns with checkboxes. Type to filter the list by column name, uncheck a column to hide it, re-check to show it, or use **Show all** / **Hide all** to flip every column at once (Hide all, then search and re-check the few you want). Hidden columns are excluded from copy and export, so the output matches exactly what you see.
+- **Column chooser** - Click the checklist icon in the toolbar to open a searchable list of all columns with checkboxes. Type to filter the list by column name, then uncheck a column to hide it or re-check to show it. The tri-state **Select all** checkbox at the top shows or hides every column at once. Under an active search it scopes to the matches and relabels to **Select all matches**, so you can uncheck it to hide everything, then search and re-check the few you want. Hidden columns are excluded from copy and export, so the output matches exactly what you see.
 
 ### Sort & Filter
 
@@ -114,7 +114,7 @@ For files larger than 10 MB you get a quick menu to open the full file, preview 
 
 ![Per-column filter panel open in CSV Grid Editor with active filters shown in the toolbar](https://raw.githubusercontent.com/Robin-Reiche/csv-grid-editor/master/images/filter-view.png)
 
-Click any column header to sort ascending or descending. Use the filter icon in the column header to open a per-column filter panel. Active filters are shown in the toolbar, click the **Filters** badge to clear them all at once.
+Click any column header to sort ascending or descending. Use the filter icon in the column header to open a per-column filter panel, where you can search the values and tick or untick them with a tri-state **Select all** checkbox that relabels to **Select all matches** under an active search. Active filters are shown in the toolbar, click the **Filters** badge to clear them all at once.
 
 ### Column Profile
 - Click the graph icon in the toolbar to open the **Column Profile** panel
@@ -186,7 +186,7 @@ When a file is open in full (non-preview) mode, the editor watches the file on d
 | `Ctrl+F` / `Ctrl+H` | Open Find & Replace bar |
 | `Enter` | Next match *(in Find bar)* |
 | `Shift+Enter` | Previous match *(in Find bar)* |
-| `Esc` | Close Find bar |
+| `Esc` | Close the open menu, dropdown, popup or Find bar |
 
 > On macOS, `Ctrl` is replaced by `⌘`.
 
