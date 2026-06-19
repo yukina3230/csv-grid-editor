@@ -64,6 +64,7 @@ function allColIds(): string[] {
 function syncMaster(): void {
     const cb = document.getElementById('col-chooser-master-cb') as HTMLInputElement | null;
     const count = document.getElementById('col-chooser-master-count');
+    const label = document.getElementById('col-chooser-master-label');
     if (!cb) return;
     const cols = visibleColIndices();
     const visible = cols.reduce((n, c) => n + (state.hiddenCols.has(c) ? 0 : 1), 0);
@@ -73,6 +74,7 @@ function syncMaster(): void {
     cb.indeterminate = visible > 0 && visible < total;
     cb.disabled = total === 0;
     if (count) count.textContent = total > 0 ? `${visible} / ${total}` : '';
+    if (label) label.textContent = searchQuery.trim() ? 'Select all matches' : 'Select all';
 }
 
 function buildList(): void {
