@@ -2,6 +2,13 @@
 
 All notable changes to CSV Grid Editor are documented here.
 
+## [1.13.1] - 2026-06-25
+
+### Fixed
+- **The grid works offline now** - The grid library (AG Grid) was loaded from a CDN, so on a machine without internet the editor was stuck on "Loading…" and never showed the data (reported in [#23](https://github.com/Robin-Reiche/csv-grid-editor/issues/23)). It is now bundled with the extension and loaded locally, so opening a CSV no longer needs a network connection. This also helps anyone behind a strict firewall or where the CDN is blocked. And it means the extension no longer reaches out to a third party every time you open a file.
+
+Thanks to [@leohao6762](https://github.com/leohao6762) for reporting it.
+
 ## [1.13.0] - 2026-06-19
 
 ### Added

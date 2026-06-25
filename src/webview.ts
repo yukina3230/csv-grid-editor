@@ -71,6 +71,9 @@ export function getWebviewContent(
     const cssUri        = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'media', 'webview.css'));
     const codiconCssUri = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'media', 'codicon.css'));
     const scriptUri     = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'media', 'webview.js'));
+    const agGridJsUri   = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'media', 'ag-grid-community.min.js'));
+    const agGridCssUri  = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'media', 'ag-grid.css'));
+    const agThemeCssUri = webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'media', 'ag-theme-alpine.css'));
 
     const escapedDelimiter = delimiter
         .replace(/\\/g, '\\\\')
@@ -81,10 +84,10 @@ export function getWebviewContent(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${nonce}' https://cdn.jsdelivr.net; style-src ${webview.cspSource} https://cdn.jsdelivr.net 'unsafe-inline'; font-src ${webview.cspSource} https://cdn.jsdelivr.net; img-src ${webview.cspSource} https://cdn.jsdelivr.net data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${nonce}'; style-src ${webview.cspSource} 'unsafe-inline'; font-src ${webview.cspSource} data:; img-src ${webview.cspSource} data:;">
     <title>CSV Viewer</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-grid.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-theme-alpine.css">
+    <link rel="stylesheet" href="${agGridCssUri}">
+    <link rel="stylesheet" href="${agThemeCssUri}">
     <link rel="stylesheet" href="${codiconCssUri}">
     <link rel="stylesheet" href="${cssUri}">
 </head>
@@ -261,8 +264,8 @@ export function getWebviewContent(
         <span class="status" id="status"></span>
     </div>
 
-    <!-- AG Grid -->
-    <script nonce="${nonce}" src="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/dist/ag-grid-community.min.js"></script>
+    <!-- AG Grid (bundled locally so the grid works offline, see issue #23) -->
+    <script nonce="${nonce}" src="${agGridJsUri}"></script>
 
     <!-- Injected globals (must run before webview.js) -->
     <script nonce="${nonce}">

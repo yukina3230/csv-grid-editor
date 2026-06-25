@@ -12,6 +12,9 @@ docs/
 media/webview.js
 media/codicon.css
 media/codicon.ttf
+media/ag-grid-community.min.js
+media/ag-grid.css
+media/ag-theme-alpine.css
 feature_ideen.txt
 test.csv
 clearView_code_example
